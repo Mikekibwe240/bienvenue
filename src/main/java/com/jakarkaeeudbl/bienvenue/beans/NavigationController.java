@@ -18,7 +18,7 @@ public class NavigationController {
     }
 
     public String voirApropos() {
-        return "apropos";
+        return "a_propos";
     }
    
 }
