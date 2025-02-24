@@ -1,5 +1,6 @@
 package com.jakarkaeeudbl.bienvenue.beans;
 
+import com.jakarkaeeudbl.bienvenue.entities.Lieu;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;

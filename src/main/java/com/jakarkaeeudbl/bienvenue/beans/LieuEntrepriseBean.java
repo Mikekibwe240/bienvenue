@@ -1,5 +1,6 @@
 package com.jakarkaeeudbl.bienvenue.beans;
 
+import com.jakarkaeeudbl.bienvenue.entities.Lieu;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

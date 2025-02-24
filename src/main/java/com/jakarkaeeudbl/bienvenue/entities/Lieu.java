@@ -1,4 +1,4 @@
-package com.jakarkaeeudbl.bienvenue.beans;
+package com.jakarkaeeudbl.bienvenue.entities;
 
 public class Lieu {
     private int id;
