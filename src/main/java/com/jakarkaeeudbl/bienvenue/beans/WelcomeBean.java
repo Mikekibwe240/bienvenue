@@ -4,19 +4,32 @@
  */
 package com.jakarkaeeudbl.bienvenue.beans;
 
+import com.jakarkaeeudbl.bienvenue.business.SessionManager;
+import com.jakarkaeeudbl.bienvenue.business.UtilisateurEntrepriseBean;
+import com.jakarkaeeudbl.bienvenue.entities.Utilisateur;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 /**
  *
  * @author MIKE KIBWE
  */
-@Named("WelcomeBean")
+@Named("welcomeBean")
 @RequestScoped
 
 public class WelcomeBean {
     private String nom;
     private String message;
+    private String email;
+    private String password;
+    @Inject
+    UtilisateurEntrepriseBean utilisateurEntrepriseBean;
+    
+    @Inject
+    private SessionManager sessionManager;
 
     public String getNom() {
         return nom;
@@ -42,6 +55,43 @@ public class WelcomeBean {
             message = "";
         } 
     }
-    
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    public String sAuthentifier() {
+        Utilisateur utilisateur = utilisateurEntrepriseBean.authentifier(email, password);
+        FacesContext context = FacesContext.getCurrentInstance();
+        if (utilisateur != null) {
+            sessionManager.createSession("user", email);
+            return "/home?faces-redirect=true";
+        } else {
+            this.message="Email ou mots de passe incorrect.";
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+            return null;
+        }
+    }
+    
+    // Méthode pour se déconnecter
+    public String deconnecter() {
+        // Invalider la session
+        sessionManager.invalidateSession();
+        // Rediriger vers la page d'accueil
+        return "/index?faces-redirect=true";
+    }
+    
+    
 }

@@ -1,4 +1,4 @@
-package com.jakarkaeeudbl.bienvenue.beans;
+package com.jakarkaeeudbl.bienvenue.business;
 
 import com.jakarkaeeudbl.bienvenue.entities.Lieu;
 import jakarta.ejb.Stateless;

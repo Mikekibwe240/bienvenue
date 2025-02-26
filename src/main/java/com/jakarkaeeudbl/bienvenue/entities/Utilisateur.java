@@ -30,8 +30,7 @@ public class Utilisateur {
       )
       private String email;
       
-      @Column(nullable = false, length =255
-      )
+      @Column(nullable = false, length =255)
       private String password;
       
       private String description;
@@ -45,6 +44,41 @@ public class Utilisateur {
         this.password = password;
         this.description = description;
     }
+
+   public String getPassword() {
+        return this.password;
+   }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    
+    public String getDescription() {
+        return description;
+    }
+    
+    
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    
+    
+
       
       
 }

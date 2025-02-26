@@ -1,12 +1,18 @@
 package com.jakarkaeeudbl.bienvenue.beans;
 
+import com.jakarkaeeudbl.bienvenue.business.UtilisateurEntrepriseBean;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 @Named("utilisateurBean")  // Permet à JSF d'utiliser #{utilisateurBean} dans le XHTML
 @RequestScoped  // Gère l'état du bean uniquement pendant la requête
@@ -14,34 +20,40 @@ public class UtilisateurBean implements Serializable {
 
     private String username;
     private String email;
-    
-    @NotBlank(message="Le mot de passe ne peut pas être vide")
-    @Pattern(regexp = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$", 
+
+    @NotBlank(message = "Le mot de passe ne peut pas être vide")
+    @Pattern(regexp = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
              message = "Le mot de passe doit contenir au moins une majuscule, un chiffre et un caractère spécial.")
     private String password;
+
+    @NotBlank(message = "Veuillez confirmer votre mot de passe")
+    private String confirmPassword;
     
-    @NotBlank(message="Veuillez confirmer votre mot de passe")
-    private String confirmPassword;  // Ajout pour la confirmation
     private String description;
-    
+    @Inject
+    UtilisateurEntrepriseBean utilisateurEntrepriseBean;
+
+
     public void ajouterUtilisateur() {
         FacesContext context = FacesContext.getCurrentInstance();
-        
+
         // Vérifier si les mots de passe correspondent
         if (!password.equals(confirmPassword)) {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Les mots de passe ne correspondent pas", null));
             return;
         }
-        
-        // Ajout du message de succès si le mot de passe respecte les critères
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Utilisateur ajouté avec succès", null));
-
-        System.out.println("Utilisateur ajouté : " + username + " - " + email);
+        utilisateurEntrepriseBean.ajouterUtilisateurEntreprise(username, email, password, description);
        
-        // Réinitialisation des champs
+     
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Utilisateur ajouté avec succès", null));
+                System.out.println("Utilisateur ajouté : " + username + " - " + email);
+       
+
+        // Réinitialisation des champs après ajout
         username = "";
         email = "";
         password = "";
+        confirmPassword = "";
         description = "";
     }
 

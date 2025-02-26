@@ -10,7 +10,7 @@ import java.io.IOException;
 public class NavigationController {
 
     public String ajouter() {
-        return "lieu";  // Assure-toi que lieu.xhtml existe bien
+        return "pages/lieu";  // Assure-toi que lieu.xhtml existe bien
     }
 
     public String visiter() {
@@ -18,7 +18,7 @@ public class NavigationController {
     }
 
     public String voirApropos() {
-        return "a_propos";
+        return "pages/a_propos";
     }
    
 }

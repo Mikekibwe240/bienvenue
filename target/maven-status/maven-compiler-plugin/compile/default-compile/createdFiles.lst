@@ -1,9 +1,12 @@
+com\jakarkaeeudbl\bienvenue\beans\NavigationController.class
+com\jakarkaeeudbl\bienvenue\entities\Lieu.class
+com\jakarkaeeudbl\bienvenue\business\SessionControlFilter.class
+com\jakarkaeeudbl\bienvenue\beans\WelcomeBean.class
 com\jakarkaeeudbl\bienvenue\entities\Utilisateur.class
 com\jakarkaeeudbl\bienvenue\beans\LieuController.class
-com\jakarkaeeudbl\bienvenue\beans\NavigationController.class
 com\jakarkaeeudbl\bienvenue\business\UtilisateurEntrepriseBean.class
-com\jakarkaeeudbl\bienvenue\entities\Lieu.class
 com\jakarkaeeudbl\bienvenue\beans\UtilisateurBean.class
-com\jakarkaeeudbl\bienvenue\beans\LieuEntrepriseBean.class
-com\jakarkaeeudbl\bienvenue\beans\WelcomeBean.class
+com\jakarkaeeudbl\bienvenue\business\LieuEntrepriseBean.class
+com\jakarkaeeudbl\bienvenue\beans\ProfilBean.class
+com\jakarkaeeudbl\bienvenue\business\SessionManager.class
 com\jakarkaeeudbl\bienvenue\beans\LieuBean.class
