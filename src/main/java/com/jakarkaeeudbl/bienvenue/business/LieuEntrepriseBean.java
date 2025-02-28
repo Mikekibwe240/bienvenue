@@ -19,7 +19,7 @@ public class LieuEntrepriseBean {
         em.persist(lieu);
     }
 
-    @Transactional
+     @Transactional
     public void modifierLieuEntreprise(int id, String nom, String description, double latitude, double longitude) {
         Lieu lieu = em.find(Lieu.class, id);
         if (lieu != null) {
@@ -27,7 +27,7 @@ public class LieuEntrepriseBean {
             lieu.setDescription(description);
             lieu.setLatitude(latitude);
             lieu.setLongitude(longitude);
-            em.merge(lieu); // Sauvegarde des modifications
+            em.merge(lieu);
         }
     }
 
@@ -46,4 +46,6 @@ public class LieuEntrepriseBean {
     public Lieu trouverLieuParId(int id) {
         return em.find(Lieu.class, id);
     }
+    
+    
 }

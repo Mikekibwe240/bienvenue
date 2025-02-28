@@ -1,12 +1,23 @@
 package com.jakarkaeeudbl.bienvenue.entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "lieu")
 public class Lieu {
+    @Id
     private int id;
     private String nom;
     private String description;
     private double longitude;
     private double latitude;
 
+    public Lieu() {
+    }
+    
+    
     public Lieu(String nom, String description, double longitude, double latitude) {
         this.id = id;
         this.nom = nom;

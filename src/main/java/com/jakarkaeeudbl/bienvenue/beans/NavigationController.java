@@ -8,17 +8,30 @@ import java.io.IOException;
 @Named("navigationController")  // Equivalent de @ManagedBean
 @RequestScoped  // Scope de la requête
 public class NavigationController {
-
+    
+        
+    
+        public void redirection(String url){
+            try{ 
+                FacesContext.getCurrentInstance().getExternalContext()
+                        .redirect(url);
+            }catch (IOException e){
+                
+                e.printStackTrace();
+            }
+        }    
+    
     public String ajouter() {
         return "pages/lieu";  // Assure-toi que lieu.xhtml existe bien
     }
 
     public String visiter() {
-        return "visiter";
+        return "pages/visite";
     }
 
     public String voirApropos() {
         return "pages/a_propos";
     }
+
    
 }

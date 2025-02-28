@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Sélectionner un lieu</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <!-- Intégration de Bootstrap -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+        <!-- Style personnalisé -->
+        <style>
+            .form-control {
+                border: 1px solid #ced4da;
+                border-radius: 4px;
+                padding: 10px;
+                font-size: 14px;
+            }
+            .btn-primary {
+                background-color: #007bff;
+                border: none;
+                padding: 10px;
+                border-radius: 4px;
+                font-size: 14px;
+                width: 100%;
+            }
+            .btn-danger {
+                background-color: #dc3545;
+                border: none;
+                padding: 10px;
+                border-radius: 4px;
+                font-size: 14px;
+                width: 100%;
+            }
+            .container {
+                background-color: #ffffff;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                max-width: 400px;
+            }
+            .form-label {
+                font-weight: bold;
+                margin-bottom: 5px;
+                font-size: 14px;
+            }
+            h4 {
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
+            body {
+                background-color: #f8f9fa;
+            }
+        </style>
+    </h:head>
+
+    <h:body class="d-flex justify-content-center align-items-center vh-100">
+        <div class="container text-center p-4">
+            <h4 class="mb-4">Sélectionner un lieu</h4>
+
+            <h:form>
+                <h:selectOneMenu value="#{lieuBean.selectedLieu}" styleClass="form-control mb-3">
+                    <f:selectItems value="#{lieuBean.listeLieux}" var="lieu"
+                                   itemValue="#{lieu.id}" itemLabel="#{lieu.nom}"/>
+                    <f:ajax listener="#{lieuBean.updateWeatherMessage}"
+                            render="weather"/>
+                </h:selectOneMenu>
+            </h:form>
+
+            <!-- Affichage de la météo -->
+            <div>
+                <h:outputText id="weather" value="#{lieuBean.weatherMessage}" styleClass="mb-3"/>
+                <br/>
+                <!-- Bouton "Visiter" -->
+                <h:form>
+                    <h:commandButton value="Visiter" action="#{formulaireVisiteBean.afficherFormulaireVisite}" styleClass="btn btn-primary btnvisit"/>
+                </h:form>
+
+                <!-- Affichage conditionnel du formulaire -->
+                <h:panelGroup rendered="#{formulaireVisiteBean.afficherFormulaireVisite}">
+                    <div class="container">
+                        <h:form>
+                            <!-- Champs pour les détails de la visite -->
+                            <div class="form-group mb-3">
+                                <h:outputLabel for="utilisateur" value="Utilisateur :" styleClass="form-label"/>
+                                <h:inputText id="utilisateur" value="#{formulaireVisiteBean.idUtilisateur}" required="true" styleClass="form-control"/>
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <h:outputLabel for="dateVisite" value="Date de visite :" styleClass="form-label"/>
+                               <h:inputText id="dateVisite" value="#{formulaireVisiteBean.dateVisite}" 
+                                           styleClass="form-control" type="date">
+                                   <f:convertDateTime pattern="yyyy-MM-dd"/>
+                               </h:inputText>
+
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <h:outputLabel for="tempsPasse" value="Temps passé :" styleClass="form-label"/>
+                                <h:inputText id="tempsPasse" value="#{formulaireVisiteBean.tempsPasse}" required="true" styleClass="form-control" type="number"/>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <h:outputLabel for="observations" value="Observations :" styleClass="form-label"/>
+                                <h:inputTextarea id="observations" value="#{formulaireVisiteBean.observations}" styleClass="form-control"/>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <h:outputLabel for="depenses" value="Dépenses :" styleClass="form-label"/>
+                                <h:inputText id="depenses" value="#{formulaireVisiteBean.depenses}" styleClass="form-control" type="number"/>
+                            </div>
+
+                            <!-- Bouton pour sauvegarder la visite -->
+                            <h:commandButton value="Enregistrer" action="#{formulaireVisiteBean.sauvegarderVisite()}" styleClass="btn btn-primary"/>
+                        </h:form>
+                    </div>
+                </h:panelGroup>
+            </div>
+        </div>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </h:body>
+</html>
